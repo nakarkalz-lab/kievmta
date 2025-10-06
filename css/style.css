@@ -1,64 +1,92 @@
-/* Импорт шрифта из Google Fonts для более красивого вида */
+/* --- Шрифты и основа --- */
+/* Используем 'Orbitron' для основного текста и 'Press Start 2P' для акцентов */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap');
 
-/* Общие стили для всего сайта */
+:root {
+    --color-primary: #ff9900; /* Исходный оранжевый */
+    --color-accent: #ffcc00; /* Яркий акцент */
+    --color-neon: #00ffff; /* Неоновый голубой для свечения */
+    --color-dark: #0a0a0a;
+    --color-medium: #1a1a1a;
+}
+
+/* --- Глобальные стили и Анимация фона --- */
 body {
-    /* Градиентный фон, переливающийся по диагонали */
-    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1a1a 100%);
-    background-size: 200% 200%; /* Увеличиваем размер градиента для эффекта переливания */
-    animation: gradientShift 15s ease infinite; /* Анимация переливания */
-    font-family: 'Orbitron', sans-serif; /* Более современный и игровой шрифт */
-    color: #ffffff; /* Белый текст */
+    /* Очень темный фон с синим и фиолетовым отливом */
+    background: linear-gradient(135deg, #100b1a 0%, #0a0a0a 50%, #100b1a 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 20s ease infinite; /* Медленное, плавное переливание */
+    
+    font-family: 'Orbitron', sans-serif;
+    color: #f0f0f0; /* Светлый, но не чисто белый текст */
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+    overflow-x: hidden;
+    
+    /* Добавляем легкую текстуру "шума" для игрового эффекта */
+    /* В реальном проекте тут нужна картинка noise.png */
+    /* background-image: url('../images/noise.png'), linear-gradient(...); */
 }
 
-/* Анимация градиента */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Контейнер для центрирования контента */
+/* Ограничитель ширины контента */
 .container {
-    max-width: 1200px; /* Максимальная ширина контента */
-    margin: 0 auto; /* Центрирование по горизонтали */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Стили для Шапки сайта (Header) */
+/* --- Шапка сайта (Header) --- */
 .main-header {
-    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
+    background-color: rgba(0, 0, 0, 0.95); /* Почти черный, высокая плотность */
     padding: 15px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #ff9900;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Тень для шапки */
-    position: relative; /* Для Z-index, если будут другие элементы */
+    border-bottom: 3px solid var(--color-primary); /* Оранжевая полоса */
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7); /* Сильная тень */
+    position: sticky; /* Шапка прилипает к верху при скролле */
+    top: 0;
     z-index: 100;
 }
 
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+/* --- Логотип с неоном --- */
 .logo {
-    font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт для логотипа */
-    font-size: 28px; /* Немного уменьшим для лучшего вписывания */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
     font-weight: bold;
-    color: #ff9900;
+    color: var(--color-accent);
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px #000000; /* Тень для логотипа */
+    letter-spacing: 4px;
+    /* 3D-эффект тени */
+    text-shadow: 2px 2px var(--color-dark), 4px 4px var(--color-medium);
 }
 
-/* Стили для Меню навигации */
+.neon-glow {
+    color: var(--color-neon); /* Голубой для свечения */
+    /* Эффект свечения */
+    text-shadow: 0 0 5px var(--color-neon), 0 0 10px var(--color-neon), 0 0 20px #0000ff;
+    animation: neonPulse 3s ease infinite alternate;
+}
+
+@keyframes neonPulse {
+    from {
+        opacity: 1;
+        text-shadow: 0 0 5px var(--color-neon), 0 0 10px var(--color-neon);
+    }
+    to {
+        opacity: 0.9;
+        text-shadow: 0 0 8px var(--color-neon), 0 0 15px var(--color-neon), 0 0 30px #0000ff;
+    }
+}
+
+/* --- Меню навигации --- */
 nav ul {
     list-style: none;
     margin: 0;
@@ -67,183 +95,301 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 30px; /* Увеличим отступ */
+    margin-left: 30px;
 }
 
 nav ul li a {
-    color: #ffffff;
+    color: #f0f0f0;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 15px; /* Увеличим padding для кнопок */
-    transition: all 0.3s ease; /* Плавный переход для всех свойств */
-    border-radius: 5px; /* Немного скругленные углы */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Тень для текста ссылок */
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    border: 1px solid transparent; /* Добавляем прозрачную рамку для стабильности */
 }
 
 nav ul li a:hover {
-    color: #ffcc00; /* Более яркий оранжевый при наведении */
-    background-color: rgba(255, 153, 0, 0.2); /* Слегка подсвечиваем фон */
-    transform: translateY(-2px); /* Легкий подъем при наведении */
+    color: var(--color-accent);
+    background-color: rgba(255, 153, 0, 0.15);
+    border: 1px solid var(--color-accent);
+    text-shadow: 0 0 5px var(--color-accent);
 }
 
-/* Стили для Основного контента */
+/* --- Основной контент (Main) --- */
 .main-content {
     text-align: center;
     padding: 100px 20px;
-    /* Если хотите добавить фоновое изображение под градиент: */
-    /* background: url('../images/kiev_mta_bg.jpg') no-repeat center center / cover; */
-    /* background-blend-mode: overlay; /* Смешивает фон с градиентом */
-    /* opacity: 0.7; /* Делает изображение полупрозрачным, чтобы градиент был виден */
     min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 1; /* Чтобы контент был поверх фоновых эффектов */
+    z-index: 1;
 }
 
 .main-content h1 {
     font-family: 'Press Start 2P', cursive;
-    font-size: 55px; /* Увеличим размер */
-    color: #ff9900;
+    font-size: 55px;
+    color: var(--color-primary);
     margin-bottom: 25px;
-    text-shadow: 4px 4px #000000, 6px 6px #555555; /* Двойная тень для объема */
+    /* Эффект "старого экрана" или сильной тени */
+    text-shadow: 4px 4px var(--color-dark), 6px 6px #555555;
     letter-spacing: 2px;
 }
 
 .main-content p {
-    font-size: 22px; /* Увеличим размер */
+    font-size: 22px;
     margin-bottom: 50px;
-    max-width: 800px; /* Ограничим ширину параграфа */
+    max-width: 800px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* Стили для кнопки "Начать играть!" */
+/* --- Универсальная Кнопка (Button) --- */
 .btn-play {
     display: inline-block;
-    background-color: #ff9900;
-    color: #000000;
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Градиент на кнопке */
+    color: var(--color-dark);
     text-decoration: none;
-    padding: 18px 35px; /* Увеличим размер кнопки */
-    font-size: 26px; /* Увеличим размер текста кнопки */
+    padding: 18px 35px;
+    font-size: 26px;
     font-weight: bold;
-    border-radius: 8px; /* Более скругленные углы */
-    transition: all 0.4s ease; /* Плавный переход для всех свойств */
+    border-radius: 8px;
+    transition: all 0.4s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4); /* Тень для кнопки */
-    border: 2px solid #ffcc00; /* Обводка кнопки */
-    animation: pulse 2s infinite; /* Анимация "пульсации" */
+    box-shadow: 0 5px 25px rgba(255, 153, 0, 0.5); /* Сильная тень свечения */
+    border: none;
+    animation: pulse 2s infinite;
 }
 
 .btn-play:hover {
-    background-color: #ffa51f;
-    transform: translateY(-5px) scale(1.05); /* Подъем и небольшое увеличение при наведении */
-    box-shadow: 0 8px 20px rgba(255, 153, 0, 0.6);
-    animation: none; /* Останавливаем пульсацию при наведении */
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Меняем градиент при наведении */
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 153, 0, 0.8);
+    animation: none;
 }
 
-/* Анимация пульсации для кнопки */
 @keyframes pulse {
     0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4); }
-    50% { transform: scale(1.03); box-shadow: 0 8px 20px rgba(255, 153, 0, 0.6); }
+    50% { transform: scale(1.03); box-shadow: 0 8px 20px rgba(255, 153, 0, 0.7); }
     100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4); }
 }
 
-/* Стили для Подвала сайта (Footer) */
-.main-footer {
-    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
-    text-align: center;
-    padding: 15px 0;
-    font-size: 15px;
-    border-top: 1px solid #333333;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3); /* Тень для подвала */
-    position: relative;
-    z-index: 100;
-}
 
-.main-footer p {
-    margin: 0;
-}
-/* --- Стили для новых страниц (Современный вид) --- */
+/* --- Стилизация "Карточек" (start_playing.html) --- */
 
-/* Стилизация сетки для шагов (для start_playing.html) */
 .steps-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Адаптивная сетка из 4-х колонок */
-    gap: 30px; /* Расстояние между карточками */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     margin-top: 50px;
     margin-bottom: 70px;
     text-align: left;
 }
 
-/* Стилизация карточки шага */
 .step-card {
-    background-color: rgba(30, 30, 30, 0.9); /* Темный фон карточки */
+    background-color: rgba(30, 30, 30, 0.9);
     padding: 30px;
     border-radius: 10px;
-    border: 1px solid #ff9900; /* Оранжевая рамка */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--color-primary); /* Главная рамка */
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.1); /* Легкое свечение */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Обрезаем эффекты, выходящие за границы */
+}
+
+/* Добавляем декоративную полосу сверху */
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
 }
 
 .step-card:hover {
-    transform: translateY(-10px); /* Карточка поднимается при наведении */
-    box-shadow: 0 15px 25px rgba(255, 153, 0, 0.2); /* Красивая оранжевая тень */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(255, 153, 0, 0.4), 0 0 30px rgba(255, 204, 0, 0.2); /* Сильное свечение при наведении */
 }
 
 .step-card h2 {
     font-size: 30px;
-    color: #ffcc00; /* Яркий заголовок */
-    margin-top: 0;
+    color: var(--color-accent);
+    margin-top: 10px; /* Учитываем декоративную полосу */
     margin-bottom: 15px;
-    font-family: 'Press Start 2P', cursive; /* Игровой шрифт */
+    font-family: 'Press Start 2P', cursive;
     letter-spacing: 1px;
     text-shadow: 1px 1px #000;
 }
 
-.step-card p {
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-/* Отступ для кнопки после сетки */
-.large-btn-gap {
-    margin-top: 50px;
-}
-
-/* Стили для секции скачивания (для download.html) */
+/* --- Стилизация Скачивания (download.html) --- */
 .download-btn {
     margin: 50px 0;
-    padding: 25px 50px; /* Большая кнопка */
-    animation: pulse 1.5s infinite; /* Привлекаем внимание к главной кнопке */
+    padding: 25px 50px;
+    font-family: 'Press Start 2P', cursive; /* Игровой шрифт для кнопки скачивания */
 }
 
 .download-info {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.85); /* Очень темный фон */
+    padding: 30px 40px;
     border-radius: 10px;
-    border: 1px dashed #444; /* Пунктирная граница */
+    border: 2px solid var(--color-neon); /* Неоновая обводка */
+    box-shadow: 0 0 15px var(--color-neon); /* Неоновое свечение */
     width: fit-content;
     margin: 40px auto;
 }
 
 .download-info h2 {
-    color: #00ff00; /* Зеленый цвет для системных требований (как в консоли) */
+    color: var(--color-neon); 
     margin-top: 0;
     font-size: 24px;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3); /* Разделитель */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .download-info ul {
-    list-style-type: none; /* Убираем маркеры */
+    list-style-type: none;
     padding: 0;
     text-align: left;
 }
 
 .download-info ul li {
     font-family: 'Orbitron', sans-serif;
-    padding: 5px 0;
+    padding: 8px 0;
     border-bottom: 1px dotted #333;
+    transition: color 0.2s;
+}
+
+.download-info ul li:last-child {
+    border-bottom: none;
+}
+
+/* --- Подвал сайта (Footer) --- */
+.main-footer {
+    background-color: rgba(0, 0, 0, 0.95);
+    text-align: center;
+    padding: 15px 0;
+    font-size: 15px;
+    border-top: 3px solid var(--color-primary);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.7);
+    position: relative;
+    z-index: 100;
+}
+
+.main-footer p {
+    margin: 0;
+}/* --- Стили для секции Новостей --- */
+.news-section {
+    padding: 70px 20px;
+    background-color: rgba(10, 10, 10, 0.7); /* Темный фон для контраста */
+    border-top: 3px solid var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+    margin-bottom: 50px;
+}
+
+.news-section h2 {
+    font-size: 36px;
+    color: var(--color-accent);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.news-card {
+    background-color: var(--color-dark);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary); /* Оранжевая рамка при наведении */
+    box-shadow: 0 5px 20px rgba(255, 153, 0, 0.2);
+}
+
+.news-card h3 {
+    color: #f0f0f0;
+    font-size: 20px;
+    border-bottom: 1px dotted #444;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.news-date {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #999;
+    text-align: right;
+    font-family: monospace; /* Выделяем дату */
+}
+
+.btn-forum {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-forum:hover {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+}/* --- Медиа-запросы для адаптации под мобильные (Красиво на телефоне!) --- */
+@media (max-width: 800px) {
+    
+    .main-header .container {
+        flex-direction: column; /* Элементы шапки выстраиваются вертикально */
+    }
+
+    nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap; /* Меню переносится на новую строку, если не помещается */
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    .main-content h1 {
+        font-size: 35px; /* Уменьшаем заголовок на маленьких экранах */
+    }
+
+    .main-content p {
+        font-size: 18px;
+    }
+
+    .btn-play {
+        padding: 15px 30px;
+        font-size: 20px;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr; /* На мобильных новостные карточки занимают всю ширину */
+    }
+
+    .download-info {
+        width: 90%; /* Блок требований занимает почти всю ширину */
+    }
 }
