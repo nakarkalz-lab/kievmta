@@ -1,14 +1,24 @@
-/* --- Шрифты и основа --- */
-/* Используем 'Orbitron' для основного текста и 'Press Start 2P' для акцентов */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap');
+/* --- НОВЫЕ ШРИФТЫ: Строгая Фантастика --- */
+/* Exo 2 для основного текста и Fjalla One для заголовков */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Fjalla+One&display=swap');
 
 :root {
-    --color-primary: #ff9900; /* Исходный оранжевый */
-    --color-accent: #ffcc00; /* Яркий акцент */
-    --color-neon: #00ffff; /* Неоновый голубой для свечения */
-    --color-dark: #0a0a0a;
-    --color-medium: #1a1a1a;
+    /* ... Оставьте переменные цветов без изменений ... */
 }
+
+/* --- Глобальные стили и Анимация фона --- */
+body {
+    /* ... Оставьте стили фона без изменений ... */
+    
+    font-family: 'Exo 2', sans-serif; /* Новый шрифт для основного текста */
+    color: #f0f0f0; 
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ... Найдите стили для логотипа и заголовков ниже ... */
 
 /* --- Глобальные стили и Анимация фона --- */
 body {
@@ -356,40 +366,479 @@ nav ul li a:hover {
     background-color: var(--color-primary);
     color: var(--color-dark);
 }/* --- Медиа-запросы для адаптации под мобильные (Красиво на телефоне!) --- */
-@media (max-width: 800px) {
+/* --- Медиа-запросы для идеальной адаптации под мобильные (НОВАЯ ВЕРСИЯ) --- */
+@media (max-width: 850px) { 
     
+    /* 1. ГЛАВНАЯ ШАПКА И МЕНЮ */
     .main-header .container {
         flex-direction: column; /* Элементы шапки выстраиваются вертикально */
+        align-items: center;
+    }
+
+    .logo {
+        margin-bottom: 15px; /* Отделяем логотип от меню */
+        font-size: 24px; /* Немного уменьшаем лого */
+        text-align: center;
     }
 
     nav ul {
-        margin-top: 10px;
-        flex-wrap: wrap; /* Меню переносится на новую строку, если не помещается */
-        justify-content: center;
+        flex-direction: column; /* Превращаем горизонтальное меню в вертикальный список */
+        width: 100%; /* Занимаем всю доступную ширину */
     }
 
     nav ul li {
-        margin: 5px 10px;
+        margin: 5px 0; /* Убираем горизонтальные отступы */
+        width: 100%;
+        text-align: center;
     }
 
+    nav ul li a {
+        display: block; /* Ссылки становятся блочными, заполняя всю кнопку */
+        padding: 10px 0;
+        border: 1px solid rgba(255, 153, 0, 0.3); /* Добавляем тонкую обводку для разделения кнопок */
+    }
+
+    /* 2. ЗАГОЛОВКИ И КОНТЕНТ */
     .main-content h1 {
-        font-size: 35px; /* Уменьшаем заголовок на маленьких экранах */
+        font-size: 35px; /* Значительно уменьшаем главный заголовок */
+        line-height: 1.2;
     }
 
     .main-content p {
-        font-size: 18px;
+        font-size: 16px;
+    }
+    
+    .news-section h2 {
+        font-size: 28px;
     }
 
     .btn-play {
-        padding: 15px 30px;
-        font-size: 20px;
+        padding: 12px 25px;
+        font-size: 18px;
     }
-
-    .news-grid {
-        grid-template-columns: 1fr; /* На мобильных новостные карточки занимают всю ширину */
+    
+    /* 3. КАРТОЧКИ (Секция "Как начать играть" и "Новости") */
+    .steps-grid, .news-grid {
+        grid-template-columns: 1fr; /* Карточки занимают всю ширину */
+        gap: 20px;
     }
-
+    
+    .step-card h2 {
+        font-size: 24px; /* Уменьшаем заголовки внутри карточек */
+    }
+    
+    /* 4. Секция СКАЧИВАНИЯ */
     .download-info {
-        width: 90%; /* Блок требований занимает почти всю ширину */
+        width: 95%; 
+        padding: 20px;
     }
+}/* --- Стили для Скролл-бара в стиле GTA --- */
+/* Работает только в Chrome, Edge и Safari */
+body::-webkit-scrollbar {
+    width: 12px; /* Ширина скролл-бара */
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--color-dark); /* Фон трека */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary); /* Цвет ползунка (оранжевый) */
+    border-radius: 20px;
+    border: 3px solid var(--color-dark); /* Обводка */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+}
+
+/* --- Эффект "Глитча" для заголовка H1 (Glitched Text) --- */
+/* Замените класс h1 на .glitch-text, если хотите применять только к одному блоку */
+.main-content h1 {
+    /* ... остальные стили h1 ... */
+    position: relative;
+    /* Анимация Глитча - срабатывает каждые 10 секунд */
+    animation: glitch-anim 0.05s infinite alternate; 
+}
+
+@keyframes glitch-anim {
+    0% { text-shadow: 2px 0 0 red, -2px 0 0 blue; }
+    50% { text-shadow: -2px 0 0 red, 2px 0 0 blue; }
+    100% { text-shadow: 0 0 0 red, 0 0 0 blue; }
+}
+/* Внимание: для некоторых пользователей частая анимация может раздражать. */
+/* --- Стили для Секции "Статус Сервера" --- */
+.server-status {
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.status-indicator.online {
+    background-color: #00ff00; /* Зеленый цвет */
+    box-shadow: 0 0 8px #00ff00, 0 0 15px rgba(0, 255, 0, 0.5); /* Неоновое свечение */
+    animation: status-pulse 1.5s infinite alternate;
+}
+
+.status-text {
+    color: #00ff00;
+    text-shadow: 0 0 3px #00ff00;
+}
+
+@keyframes status-pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}/* --- Стили для Мини-галереи / Скриншотов --- */
+.gallery-section {
+    padding: 70px 0;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    color: var(--color-accent);
+    margin-bottom: 50px;
+}
+
+.screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.screenshot-item {
+    background-color: var(--color-medium);
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-item:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+    box-shadow: 0 0 30px rgba(255, 153, 0, 0.7); /* Сильное свечение */
+}
+
+.screenshot-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s;
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-accent);
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px #000;
+    opacity: 0; /* Скрыто по умолчанию */
+    transition: opacity 0.3s;
+}
+
+.screenshot-item:hover .caption {
+    opacity: 1; /* Появление при наведении */
+}
+
+.gallery-note {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #888;
+}/* --- Стили для Цитаты/Отзыва Дня --- */
+.quote-section {
+    padding: 60px 20px;
+    background-color: rgba(0, 0, 0, 0.85); /* Очень темный фон */
+    border-top: 1px dashed #333;
+    border-bottom: 1px dashed #333;
+    text-align: center;
+}
+
+.quote-card {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid var(--color-neon);
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.quote-icon {
+    font-size: 40px;
+    color: var(--color-neon);
+    margin-bottom: 20px;
+    display: block;
+    text-shadow: 0 0 5px var(--color-neon);
+}
+
+.quote-text {
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #f0f0f0;
+}
+
+.quote-author {
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 16px;
+}
+/* --- Стили для страницы Контактов (contacts.html) --- */
+
+/* Сетка для контактных карточек */
+.contacts-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.contact-card {
+    background-color: var(--color-medium);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(var(--color-primary), 0.3);
+}
+
+.contact-icon {
+    font-size: 45px;
+    color: var(--color-neon);
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--color-neon);
+}
+
+.contact-card h3 {
+    color: var(--color-accent);
+    font-size: 22px;
+    margin-top: 0;
+}
+
+.btn-contact {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-contact:hover {
+    background-color: var(--color-accent);
+}
+
+.contact-handle {
+    font-family: 'Fjalla One', sans-serif;
+    color: var(--color-neon);
+    font-size: 18px;
+    text-shadow: 0 0 5px var(--color-neon);
+    margin-top: 10px;
+}
+
+/* Стили для секции FAQ (Часто задаваемые вопросы) */
+.faq-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #333;
+    text-align: left; /* Вопросы и ответы выравниваем по левому краю */
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 40px;
+}
+
+.faq-item {
+    background-color: var(--color-medium);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--color-neon); /* Декоративная полоса */
+    border-radius: 4px;
+}
+
+.faq-question {
+    color: var(--color-accent);
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.faq-answer {
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 0;
+}
+/* --- Специальные стили для Вашей карточки контакта --- */
+
+/* Выделение основной карточки Telegram */
+.primary-contact-card {
+    /* Более яркий фон */
+    background: linear-gradient(145deg, var(--color-dark), var(--color-medium)); 
+    /* Сильная рамка */
+    border: 3px solid var(--color-primary); 
+    /* Яркое свечение */
+    box-shadow: 0 0 20px rgba(var(--color-primary), 0.7); 
+    transform: scale(1.02); /* Чуть больше, чем остальные */
+}
+
+/* Изменяем цвет иконки Telegram, чтобы он соответствовал вашему стилю */
+.fa-telegram-plane {
+    color: var(--color-primary) !important; /* Делаем лаймовым */
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.contact-card:hover.primary-contact-card {
+    /* Эффект наведения становится еще сильнее */
+    transform: translateY(-8px) scale(1.05); 
+    box-shadow: 0 15px 35px rgba(var(--color-primary), 0.7), 0 0 30px rgba(var(--color-primary), 0.5);
+}
+
+/* Убедимся, что все иконки контактов имеют правильный цвет */
+.contact-card .contact-icon {
+    color: var(--color-neon); /* Используем неоновый цвет по умолчанию */
+}
+/* --- НОВЫЕ Стили для Кнопки "Наверх" (Большая, Красивая и Скрытая) --- */
+/* --- НОВЫЕ Стили для Кнопки "Наверх" (Улучшенная заметность) --- */
+.back-to-top {
+    position: fixed;
+    bottom: 30px; 
+    right: 30px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    text-decoration: none;
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px; 
+    
+    /* Добавляем Неоновый контур для заметности */
+    border: 3px solid var(--color-neon); 
+    box-shadow: 0 0 15px var(--color-neon); /* Свечение */
+    
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(100px); 
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
+    
+    z-index: 9999;
+    animation: button-pulse 2s infinite; /* Добавляем пульсацию */
+}
+
+/* Анимация пульсации для привлечения внимания */
+@keyframes button-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 15px var(--color-neon); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px var(--color-neon), 0 0 5px var(--color-primary); }
+    100% { transform: scale(1); box-shadow: 0 0 15px var(--color-neon); }
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: var(--color-accent);
+    box-shadow: 0 0 35px var(--color-accent), 0 0 10px var(--color-primary);
+    transform: translateY(-3px) scale(1.05); 
+    animation: none; /* Отключаем пульсацию при наведении */
+}
+
+/* Мобильная адаптация - без изменений */
+/* ... (оставляем media query без изменений) ... */
+}
+
+/* Класс, который добавляет JavaScript, чтобы показать кнопку */
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Сдвигаем на место */
+}
+
+.back-to-top:hover {
+    background-color: var(--color-accent);
+    box-shadow: 0 4px 30px rgba(var(--color-accent), 0.9);
+    transform: translateY(-3px); /* Легкий подъем при наведении */
+}
+
+/* Мобильная адаптация */
+@media (max-width: 850px) {
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+/* --- Стили для элемента "Копировать по клику" --- */
+.copyable-text {
+    cursor: pointer; /* Делаем курсор "рукой" для имитации ссылки */
+    user-select: none; /* Запрещаем случайное выделение текста */
+    transition: color 0.2s ease;
+    
+    /* Добавляем пространство для значка */
+    padding-right: 25px; 
+    position: relative;
+    display: inline-block;
+}
+
+.copyable-text:hover {
+    color: var(--color-accent); /* Меняем цвет при наведении */
+}
+
+/* Стили для иконки копирования */
+.copy-icon {
+    font-size: 16px;
+    margin-left: 8px;
+    color: var(--color-neon);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Скрываем подсказку по умолчанию */
+.copy-hint {
+    display: none;
+    font-size: 12px;
+    color: #999;
+    margin-left: 10px;
+    transition: opacity 0.3s;
+}
+
+/* Показываем подсказку при наведении */
+.copyable-text:hover .copy-hint {
+    display: inline;
+    color: var(--color-primary);
 }
