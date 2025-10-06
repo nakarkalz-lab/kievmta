@@ -1,0 +1,97 @@
+/* Общие стили для всего сайта */
+body {
+    font-family: Arial, sans-serif; /* Похож на многие игровые шрифты */
+    background-color: #1a1a1a; /* Темный фон, как в GTA */
+    color: #ffffff; /* Белый текст */
+    margin: 0; /* Убираем стандартные отступы браузера */
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Стили для Шапки сайта (Header) */
+.main-header {
+    background-color: #000000; /* Черный цвет */
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between; /* Распределение элементов по краям */
+    align-items: center;
+    border-bottom: 3px solid #ff9900; /* Яркая оранжевая полоса - акцент */
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff9900; /* Оранжевый логотип */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Стили для Меню навигации */
+nav ul {
+    list-style: none; /* Убираем маркеры списка */
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none; /* Убираем подчеркивание ссылок */
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff9900; /* Ссылки становятся оранжевыми при наведении */
+}
+
+/* Стили для Основного контента */
+.main-content {
+    text-align: center;
+    padding: 100px 20px;
+    /* Можно добавить фоновое изображение Киева или что-то в стиле MTA, используя background-image: url('../images/background.jpg'); */
+    min-height: 500px;
+}
+
+.main-content h1 {
+    font-size: 50px;
+    color: #ff9900;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+/* Стили для кнопки "Начать играть!" */
+.btn-play {
+    display: inline-block;
+    background-color: #ff9900; /* Яркая кнопка */
+    color: #000000; /* Черный текст на кнопке */
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px; /* Немного скругленные углы */
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-play:hover {
+    background-color: #ffa51f; /* Немного светлее при наведении */
+}
+
+/* Стили для Подвала сайта (Footer) */
+.main-footer {
+    background-color: #000000;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    border-top: 1px solid #333333;
+}
